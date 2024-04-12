@@ -1,14 +1,14 @@
 > Notar que **X** corresponde al número del grupo asignado.
 
-# Grupo x
+# Grupo 5
 
-Este es el repositorio del *Grupo X*, cuyos integrantes son:
+Este es el repositorio del *Grupo 5*, cuyos integrantes son:
 
-* Integrante 1 - Rol
-* Integrante 2 - Rol
-* Integrante 3 - Rol
-* Integrante 4 - Rol
-* **Tutor**: Nombre Tutor
+* Benjamin Ponce - 202173615-8
+* Javiera Bobadilla - 202173584-4
+* Cristóbal Lazcano - 202173567-4
+* Elias Valle - Rol
+* **Tutor**: Ignacio Muñoz
 
 ## Wiki
 
