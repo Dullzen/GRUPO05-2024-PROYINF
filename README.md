@@ -7,7 +7,7 @@ Este es el repositorio del *Grupo 5*, cuyos integrantes son:
 * Benjamin Ponce - 202173615-8
 * Javiera Bobadilla - 202173584-4
 * Cristóbal Lazcano - 202173567-4
-* Elias Valle - Rol
+* Elias Valle - 202173537-2
 * **Tutor**: Ignacio Muñoz
 
 ## Wiki
