@@ -26,4 +26,8 @@ Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/Dullze
 
 ## Aspectos técnicos relevantes
 
-_Todo aspecto relevante cuando para poder usar el proyecto o consideraciones del proyecto base a ser entregado_
+El backend fue levantado exitosamente:
+![Screenshot 2024-04-26 004717](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/7f4d3e95-297e-44f8-ba31-9bb5b46aad56)
+![Screenshot 2024-04-26 002221](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/d95a786d-e4dd-48c5-b13e-eb6ce18c440d)
+Sin embargo el frontend da este error en el cual se esta trabajando:
+![Screenshot 2024-04-26 004523](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/14a9c6de-6700-471d-a195-05a82e7805c3)
