@@ -7,8 +7,8 @@ export default function Header() {
 
     return (
        <Navbar bg="dark" variant="dark" className="d-flex justify-content-between align-items-center">
-            <Navbar.Brand href="#home">
-            <div>INF236 Boilerplate</div>
+            <Navbar.Brand href="/home">
+            <div>VISUALIZADOR ARCHIVOS DICOM</div>
         
             </Navbar.Brand>
             <div className="text-white"> Bienvenido {nombre}</div>
