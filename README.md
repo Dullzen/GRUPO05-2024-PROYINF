@@ -26,6 +26,18 @@ Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/Dullze
 
 ## Aspectos técnicos relevantes
 
-El frontend fue reparado y ahora funciona correctamente con el backend y la BD:
+Se presenta el siguiente prototipo:
+Pagina principal:
+![image](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/1caa4ce3-d689-4504-8c7d-59635e145d97)
+Listado y creacion de usuarios:
+![image](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/40c24cbe-c198-46d1-b7e5-a46c67fd522d)
+Buscador de archivos:
+![image](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/1b7358f7-9841-4d5b-9fe4-a90c898a5cc9)
+Abrir un archivo en particular:
+![image](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/88b826ef-7470-4024-a664-3378071ceca9)
+Subir un archivo:
+![image](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/c1a83073-3a9f-42f2-a9df-eb921e237d56)
 
-![img](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/79dd1743-693f-4c94-b15e-4566a14f2d6a)
+
+
+
