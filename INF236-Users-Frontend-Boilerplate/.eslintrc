@@ -1,0 +1,28 @@
+{
+    "extends": [
+        "eslint-config-airbnb/whitespace",
+        "prettier"
+    ],
+    "plugins": [
+        "prettier"
+    ],
+    "env": {
+    },
+    "rules": {
+        "semi": 0,
+        "react/jsx-filename-extension": [
+            0,
+            {
+                "extensions": [
+                    ".ts",
+                    ".js",
+                    ".jsx",
+                    ".tsx"
+                ]
+            }
+        ],
+        "prettier/prettier": [
+            0
+        ]
+    }
+}

@@ -1,0 +1,8 @@
+require("babel-register");
+
+const path = require('path');
+module.exports = {
+	'config': path.resolve('migrations', 'migrationsConfig.cjs'),
+	'models-path': path.resolve('src', 'models'),
+	'migrations-path': path.resolve('migrations'),
+};
