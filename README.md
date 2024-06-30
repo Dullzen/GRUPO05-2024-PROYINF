@@ -26,18 +26,16 @@ Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/Dullze
 
 ## Aspectos técnicos relevantes
 
-Se presenta el siguiente prototipo:
-Pagina principal:
-![image](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/1caa4ce3-d689-4504-8c7d-59635e145d97)
-Listado y creacion de usuarios:
-![image](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/40c24cbe-c198-46d1-b7e5-a46c67fd522d)
-Buscador de archivos:
-![image](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/1b7358f7-9841-4d5b-9fe4-a90c898a5cc9)
-Abrir un archivo en particular:
-![image](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/88b826ef-7470-4024-a664-3378071ceca9)
-Subir un archivo:
-![image](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/c1a83073-3a9f-42f2-a9df-eb921e237d56)
+HITO 6:
+Busqueda:
+![busc_arch](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/db0f8ebc-9736-4e11-9a26-294e84236b13)
+![archdisplay](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/d471c2ef-e849-4695-8107-4e4239e7fb40)
 
+Buzon de subida de imagenes:
+![buzon](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/45378e35-755f-4d6b-a853-e5401963232d)
+
+Lista imagenes:
+![Listimg](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/2c2f1803-e273-4f8e-91be-17cedc7d3864)
 
 
 
