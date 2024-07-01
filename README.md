@@ -27,6 +27,7 @@ Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/Dullze
 ## Aspectos técnicos relevantes
 
 HITO 6:
+Video proyecto: https://youtu.be/GWyhq-UcAtY
 - Busqueda:
 ![busc_arch](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/db0f8ebc-9736-4e11-9a26-294e84236b13)
 ![archdisplay](https://github.com/Dullzen/GRUPO05-2024-PROYINF/assets/165406695/d471c2ef-e849-4695-8107-4e4239e7fb40)
