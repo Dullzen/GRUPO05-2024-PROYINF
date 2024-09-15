@@ -18,4 +18,9 @@ Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/Dullze
 ## Hito 2
 Cambios en el proyecto han sido realizados.
 
-
+## Planning Pocker
+### Escala 1-10:
+Descarga imagenes 3
+Autenticacion de usuarios 7
+Anotaciones en imagenes 5
+Exportacion de imagenes 4
