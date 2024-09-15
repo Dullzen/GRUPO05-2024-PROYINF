@@ -11,4 +11,5 @@ export default function Ejemplo() {
             Archivo DICOM {number}
         </div>
     );
+    
 }
