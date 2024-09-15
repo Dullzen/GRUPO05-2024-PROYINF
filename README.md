@@ -16,6 +16,6 @@ Este es el repositorio del *Lethal Company*, cuyos integrantes son:
 Puede acceder a la Wiki mediante el siguiente [enlace](https://github.com/Dullzen/GRUPO05-2024-PROYINF/wiki)
 
 ## Hito 2
-
+Cambios en el proyecto han sido realizados.
 
 
