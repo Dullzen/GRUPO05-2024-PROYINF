@@ -17,6 +17,7 @@ User.init({
     sequelize,
     timestamps: true,
   }
+          
 );
 
 export default User;
