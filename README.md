@@ -7,7 +7,7 @@ Este es el repositorio del *Lethal Company*, cuyos integrantes son:
 * Javiera Bobadilla - 202173584-4
 * Cristóbal Lazcano - 202173567-4
 * Elias Valle - 202173537-2
-* **Tutor**: Ignacio Muñoz
+* **Ayudante**: José Southerland
 
 ## Wiki
 
