@@ -27,6 +27,6 @@ Cambios en el proyecto han sido realizados.
 
 ## Hito 3
 Durante los testeos, se obtuvo que para imágenes dentro de la página detectaba error al igual que para imágenes que no se encontraban dentro de la página 
-![Imagen DICOM subida](Captura de pantalla 2024-10-08 001610.png)
+![Imagen DICOM subida](https://github.com/Dullzen/GRUPO05-2024-PROYINF/blob/8a4120aa4a6b7a69a00bb8cd27105e64c0a35405/Captura%20de%20pantalla%202024-10-08%20001610.png)
 ![Test para la vista]()
 ![Test para la descarga]()
