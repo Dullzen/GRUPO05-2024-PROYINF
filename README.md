@@ -27,6 +27,6 @@ Cambios en el proyecto han sido realizados.
 
 ## Hito 3
 Durante los testeos, se obtuvo que para imágenes dentro de la página detectaba error al igual que para imágenes que no se encontraban dentro de la página 
-![Imagen DICOM subida]()
+![Imagen DICOM subida](Captura de pantalla 2024-10-08 001610.png)
 ![Test para la vista]()
 ![Test para la descarga]()
