@@ -24,3 +24,9 @@ Cambios en el proyecto han sido realizados.
 * Autenticacion de usuarios 7
 * Anotaciones en imagenes 5
 * Exportacion de imagenes 4
+
+## Hito 3
+Durante los testeos, se obtuvo que para imágenes dentro de la página detectaba error al igual que para imágenes que no se encontraban dentro de la página 
+![Imagen DICOM subida]()
+![Test para la vista]()
+![Test para la descarga]()
