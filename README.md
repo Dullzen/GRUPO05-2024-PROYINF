@@ -24,3 +24,12 @@ Cambios en el proyecto han sido realizados.
 * Autenticacion de usuarios 7
 * Anotaciones en imagenes 5
 * Exportacion de imagenes 4
+
+## Hito 3
+Durante los testeos, se obtuvo que para imágenes dentro de la página detectaba error al igual que para imágenes que no se encontraban dentro de la página 
+![ImageN DICOM subida](https://github.com/Dullzen/GRUPO05-2024-PROYINF/blob/8a4120aa4a6b7a69a00bb8cd27105e64c0a35405/Captura%20de%20pantalla%202024-10-08%20001610.png)
+*Figura 1: Captura de una imagen DICOM subida exitosamente.*
+![Test para la vista](https://github.com/Dullzen/GRUPO05-2024-PROYINF/blob/efb5cd695d5bd9252436286177e8547c6d188925/Captura%20de%20pantalla%202024-10-08%20002645.png)
+*Figura 2: Captura del testeo para esa imagen para la visualiazación.*
+![Test para la descarga](https://github.com/Dullzen/GRUPO05-2024-PROYINF/blob/19db13f9a8eec07de1a89c4df335b88687a6fa9e/Captura%20de%20pantalla%202024-10-08%20003529.png)
+*Figura 3: Captura del testeo para esa imagen para la descarga.*
