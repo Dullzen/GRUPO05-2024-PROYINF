@@ -33,3 +33,30 @@ Durante los testeos, se obtuvo que para imágenes dentro de la página detectaba
 *Figura 2: Captura del testeo para esa imagen para la visualiazación.*
 ![Test para la descarga](https://github.com/Dullzen/GRUPO05-2024-PROYINF/blob/19db13f9a8eec07de1a89c4df335b88687a6fa9e/Captura%20de%20pantalla%202024-10-08%20003529.png)
 *Figura 3: Captura del testeo para esa imagen para la descarga.*
+
+## Hito 4
+
+## Descripción General
+
+Este proyecto permite la visualización y manipulación de imágenes médicas en formato DICOM. Incluye la funcionalidad para buscar imágenes DICOM mediante el ID o nombre del paciente, visualizar las imágenes en tres direcciones ortogonales (axial, coronal y sagital), y herramientas para manipular las imágenes, como ajustar el contraste, invertir la imagen a negativo, y aplicar distintos mapas de colores.
+
+## Funcionalidades Principales
+
+1. **Búsqueda por Cabecera DICOM**:
+   - El usuario puede buscar imágenes DICOM mediante el **ID del paciente** o el **nombre del paciente**.
+   - La cabecera DICOM (información del paciente) se muestra junto a la imagen seleccionada.
+
+2. **Visualización en 3 Direcciones Ortogonales**:
+   - Las imágenes DICOM pueden visualizarse en tres vistas ortogonales: **Axial**, **Coronal**, y **Sagital**.
+
+3. **Manipulación de Imágenes**:
+   - El usuario puede ajustar el **contraste** (Window Width) y el **brillo** (Window Center) mediante controles deslizantes.
+   - Existe una opción para **invertir los colores** de la imagen, permitiendo visualizarla en negativo.
+   - El usuario puede seleccionar distintos **mapas de colores**, como escala de grises o un mapa de calor (hot).
+
+   Dentro de los commits e implementaciones de las historias de usuarios se tiene el siguiente avance:
+1. Funcionalidad de visualización ortogonal de imágenes DICOM : En progreso
+2. Herramienta de ajuste de contraste y brillo: En progreso
+3. Botón para invertir imagen a negativo : En progreso
+4. Aplicación de mapas de colores (grayscale, hot) en imágenes DICOM: En progreso
+5.  Búsqueda de imágenes por cabecera DICOM (ID o nombre del paciente) 
