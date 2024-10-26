@@ -35,6 +35,24 @@ Durante los testeos, se obtuvo que para imágenes dentro de la página detectaba
 *Figura 3: Captura del testeo para esa imagen para la descarga.*
 
 ## Hito 4
+## Actualizacion de los testing
+Una vez realizados algunos ajustes, conseguimos resultados ideales para los testeos:
+
+![subida de imagenes](https://github.com/Dullzen/GRUPO05-2024-PROYINF/blob/03d3fbf34a2eb75dbb6fc6ff22730041b5989e2c/IMAGENES%20H4/Prueba%20subida%20imagenes%20DICOM%20-%20H4.jpg)
+
+*Figura 4: Subida de imagenes DICOM a la aplicacion.*
+
+![busqueda de imagenes](https://github.com/Dullzen/GRUPO05-2024-PROYINF/blob/03d3fbf34a2eb75dbb6fc6ff22730041b5989e2c/IMAGENES%20H4/Pruebas%20de%20busqueda%20de%20imagenes%20-%20H4.jpg)
+
+*Figura 5: Busqueda de iamgenes en la aplicacion.*
+
+![heathers](https://github.com/Dullzen/GRUPO05-2024-PROYINF/blob/03d3fbf34a2eb75dbb6fc6ff22730041b5989e2c/IMAGENES%20H4/verificacion%20de%20los%20headers%20-%20H4.jpg)
+
+*Figura 6: verificación de que los headers de las imágenes se muestran correctamente.*
+
+![tiempo ejecucion](https://github.com/Dullzen/GRUPO05-2024-PROYINF/blob/03d3fbf34a2eb75dbb6fc6ff22730041b5989e2c/IMAGENES%20H4/tiempo%20de%20ejecucion%20-%20H4.jpg)
+
+*Figura 7: Tiempo de ejecución de las pruebas y confirmación de resultados.*
 
 ## Descripción General
 
