@@ -63,6 +63,72 @@ export default function Search() {
     }
   };
 
+  const handleDownloadImage = () => {
+    const element = document.getElementById('dicomImage');
+    if (element) {
+      const canvas = element.querySelector('canvas');
+      if (canvas) {
+        const imageURL = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = imageURL;
+        link.download = 'dicom_image.png';
+        link.click();
+      } else {
+        console.error('No se pudo encontrar el canvas para convertirlo a PNG');
+      }
+    }
+  };
+  
+  const handleDownloadHeader = () => {
+    const headerData = `
+      Datos del Paciente
+      Nombre: ${fileData.patientName || 'No disponible'}
+      ID: ${fileData.patientId || 'No disponible'}
+      Fecha de Nacimiento: ${fileData.patientBirthDate || 'No disponible'}
+      Sexo: ${fileData.patientSex || 'No disponible'}
+      
+      Información del Estudio
+      Fecha del Estudio: ${fileData.studyDate || 'No disponible'}
+      Fecha de la Serie: ${fileData.seriesDate || 'No disponible'}
+      Fecha de Adquisición: ${fileData.acquisitionDate || 'No disponible'}
+      Hora del Estudio: ${fileData.studyTime || 'No disponible'}
+      Hora de la Serie: ${fileData.seriesTime || 'No disponible'}
+      Número de Acceso: ${fileData.accessionNumber || 'No disponible'}
+      Modalidad: ${fileData.modality || 'No disponible'}
+      Descripción del Estudio: ${fileData.studyDescription || 'No disponible'}
+      Descripción de la Serie: ${fileData.seriesDescription || 'No disponible'}
+      
+      Información del Dispositivo
+      Fabricante: ${fileData.manufacturer || 'No disponible'}
+      Modelo del Dispositivo: ${fileData.manufacturerModelName || 'No disponible'}
+      Nombre de la Estación: ${fileData.stationName || 'No disponible'}
+      Número de Serie: ${fileData.deviceSerialNumber || 'No disponible'}
+      Versiones del Software: ${fileData.softwareVersions || 'No disponible'}
+      
+      Parámetros Técnicos de la Imagen
+      Espesor del Corte: ${fileData.sliceThickness || 'No disponible'}
+      Tiempo de Repetición: ${fileData.repetitionTime || 'No disponible'}
+      Tiempo de Eco: ${fileData.echoTime || 'No disponible'}
+      Fuerza del Campo Magnético: ${fileData.magneticFieldStrength || 'No disponible'}
+      Espaciado de Píxeles: ${fileData.pixelSpacing || 'No disponible'}
+      Centro de la Ventana: ${fileData.windowCenter || 'No disponible'}
+      Ancho de la Ventana: ${fileData.windowWidth || 'No disponible'}
+      
+      Otros Datos Relevantes
+      Tipo de Imagen: ${fileData.imageType || 'No disponible'}
+      Orientación de la Imagen: ${fileData.imageOrientation || 'No disponible'}
+      Posición de la Imagen: ${fileData.imagePosition || 'No disponible'}
+      Interpretación Fotométrica: ${fileData.photometricInterpretation || 'No disponible'}
+    `;
+  
+    const blob = new Blob([headerData], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `${fileData.dicomFileName}_header.txt`;
+    link.click();
+  };
+  
+
   useEffect(() => {
     if (fileData && fileData.dicomFilePath) {
       const imageId = `wadouri:http://localhost:8080/uploads/${fileData.dicomFilePath}`;
@@ -144,105 +210,39 @@ export default function Search() {
           <p><strong>Posición de la Imagen:</strong> {fileData.imagePosition}</p>
           <p><strong>Interpretación Fotométrica:</strong> {fileData.photometricInterpretation}</p>
           <div>
-          <div style={{ marginTop: '20px', textAlign: 'center' }}>
-            <button
-              onClick={() => {
-                const element = document.getElementById('dicomImage');
-                
-                if (element) {
-                  const canvas = element.querySelector('canvas');
-                  if (canvas) {
-                    const imageURL = canvas.toDataURL('image/png');
-                    
-                    const link = document.createElement('a');
-                    link.href = imageURL;
-                    link.download = 'dicom_image.png';  
-                    link.click();
-                  } else {
-                    console.error("No se pudo encontrar el canvas para convertirlo a PNG");
-                  }
-                }
-              }}
-              style={{
-                padding: '10px 20px',
-                fontSize: '16px',
-                backgroundColor: '#6c757d', // Color gris
-                color: 'white',
-                border: 'none',
-                borderRadius: '5px',
-                marginRight: '10px',
-                cursor: 'pointer',
-              }}
-            >
-              Descargar imagen PNG
-            </button>
-
-            <button
-              onClick={() => {
-                const headerData = `
-                Datos del Paciente
-                Nombre: ${fileData.patientName || 'No disponible'}
-                ID: ${fileData.patientId || 'No disponible'}
-                Fecha de Nacimiento: ${fileData.patientBirthDate || 'No disponible'}
-                Sexo: ${fileData.patientSex || 'No disponible'}
-                
-                Información del Estudio
-                Fecha del Estudio: ${fileData.studyDate || 'No disponible'}
-                Fecha de la Serie: ${fileData.seriesDate || 'No disponible'}
-                Fecha de Adquisición: ${fileData.acquisitionDate || 'No disponible'}
-                Hora del Estudio: ${fileData.studyTime || 'No disponible'}
-                Hora de la Serie: ${fileData.seriesTime || 'No disponible'}
-                Número de Acceso: ${fileData.accessionNumber || 'No disponible'}
-                Modalidad: ${fileData.modality || 'No disponible'}
-                Descripción del Estudio: ${fileData.studyDescription || 'No disponible'}
-                Descripción de la Serie: ${fileData.seriesDescription || 'No disponible'}
-                
-                Información del Dispositivo
-                Fabricante: ${fileData.manufacturer || 'No disponible'}
-                Modelo del Dispositivo: ${fileData.manufacturerModelName || 'No disponible'}
-                Nombre de la Estación: ${fileData.stationName || 'No disponible'}
-                Número de Serie: ${fileData.deviceSerialNumber || 'No disponible'}
-                Versiones del Software: ${fileData.softwareVersions || 'No disponible'}
-                
-                Parámetros Técnicos de la Imagen
-                Espesor del Corte: ${fileData.sliceThickness || 'No disponible'}
-                Tiempo de Repetición: ${fileData.repetitionTime || 'No disponible'}
-                Tiempo de Eco: ${fileData.echoTime || 'No disponible'}
-                Fuerza del Campo Magnético: ${fileData.magneticFieldStrength || 'No disponible'}
-                Espaciado de Píxeles: ${fileData.pixelSpacing || 'No disponible'}
-                Centro de la Ventana: ${fileData.windowCenter || 'No disponible'}
-                Ancho de la Ventana: ${fileData.windowWidth || 'No disponible'}
-                
-                Otros Datos Relevantes
-                Tipo de Imagen: ${fileData.imageType || 'No disponible'}
-                Orientación de la Imagen: ${fileData.imageOrientation || 'No disponible'}
-                Posición de la Imagen: ${fileData.imagePosition || 'No disponible'}
-                Interpretación Fotométrica: ${fileData.photometricInterpretation || 'No disponible'}
-                `;
-              
-                const blob = new Blob([headerData], { type: 'text/plain' });
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = `${fileData.dicomFileName}_header.txt`;
-                link.click();
-              }}
-              style={{
-                padding: '10px 20px',
-                fontSize: '16px',
-                backgroundColor: '#6c757d', // Color gris
-                color: 'white',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer',
-              }}
-            >
-              Descargar Información de Cabecera
-            </button>
-          </div>
-
+            <div style={{ marginTop: '20px', textAlign: 'center' }}>
+              <button
+                onClick={handleDownloadImage}
+                style={{
+                  padding: '10px 20px',
+                  fontSize: '16px',
+                  backgroundColor: '#6c757d',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '5px',
+                  marginRight: '10px',
+                  cursor: 'pointer',
+                }}
+              >
+                Descargar Imagen PNG
+              </button>
+              <button
+                onClick={handleDownloadHeader}
+                style={{
+                  padding: '10px 20px',
+                  fontSize: '16px',
+                  backgroundColor: '#6c757d',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '5px',
+                  cursor: 'pointer',
+                }}
+              >
+                Descargar Información de Cabecera
+              </button>
+            </div>
             <p><strong>Archivo DICOM:</strong></p>
             <div id="dicomImage" style={{ width: '512px', height: '512px', margin: 'auto', background: 'black' }}></div>
-
             <h2>Controles de la Imagen</h2>
             <div>
               <label htmlFor="contrast">Contraste (Window Width):</label>
