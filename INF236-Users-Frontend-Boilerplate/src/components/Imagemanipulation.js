@@ -13,41 +13,22 @@ function Imagemanipulation({ imageUrl, initialWindowCenter, initialWindowWidth }
   const [windowCenter, setWindowCenter] = useState(initialWindowCenter || 50);
   const [invertColors, setInvertColors] = useState(false);
 
-  const updateViewport = () => {
-    const element = divRef.current;
-
-    if (!cornerstone.getEnabledElement(element)) {
-      console.error('Elemento no habilitado por Cornerstone');
-      return;
-    }
-
-    const viewport = cornerstone.getViewport(element);
-
-    if (!viewport) {
-      console.error('No se pudo obtener el viewport');
-      return;
-    }
-
-    viewport.voi.windowWidth = parseInt(windowWidth, 10);
-    viewport.voi.windowCenter = parseInt(windowCenter, 10);
-    cornerstone.setViewport(element, viewport);
-  };
-
   useEffect(() => {
+    if (!imageUrl) {
+      console.error('La URL de la imagen no es válida');
+      return;
+    }
+
     const element = divRef.current;
     cornerstone.enable(element);
 
     const loadImage = async () => {
       try {
-        const image = await cornerstone.loadImage(`wadouri:${imageUrl}`);
-        const viewport = cornerstone.getDefaultViewportForImage(element, image);
+        const formattedImageUrl = `wadouri:${imageUrl}`;
+        console.log('Cargando imagen desde:', formattedImageUrl);
 
-        viewport.voi.windowWidth = 1500; // Valores predeterminados
-        viewport.voi.windowCenter = 50;
-        viewport.invert = invertColors;
-
+        const image = await cornerstone.loadImage(formattedImageUrl);
         cornerstone.displayImage(element, image);
-        cornerstone.setViewport(element, viewport);
       } catch (error) {
         console.error('Error cargando la imagen DICOM:', error);
       }
@@ -58,62 +39,43 @@ function Imagemanipulation({ imageUrl, initialWindowCenter, initialWindowWidth }
     return () => {
       cornerstone.disable(element);
     };
-  }, [imageUrl, invertColors]);
+  }, [imageUrl]);
 
   return (
     <div>
-      <h2>Visualizando: {imageUrl.split('/').pop()}</h2>
+      <h2>Visualizando: {imageUrl ? imageUrl.split('/').pop() : 'No se ha cargado la imagen'}</h2>
       <div ref={divRef} style={{ width: '512px', height: '512px', backgroundColor: 'black' }} />
-
       <div>
-        <label htmlFor="contrast">Contraste (Window Width):</label>
+        <label>Contraste:</label>
         <input
           type="range"
-          id="contrast"
           min="1"
           max="5000"
           value={windowWidth}
           onChange={(e) => setWindowWidth(e.target.value)}
-          onMouseUp={() => {
-            if (cornerstone.getEnabledElement(divRef.current)) {
-              updateViewport();
-            } else {
-              console.error('La imagen no está completamente cargada.');
-            }
-          }}
         />
       </div>
       <div>
-        <label htmlFor="brightness">Brillo (Window Center):</label>
+        <label>Brillo:</label>
         <input
           type="range"
-          id="brightness"
           min="-1000"
           max="1000"
           value={windowCenter}
           onChange={(e) => setWindowCenter(e.target.value)}
-          onMouseUp={() => {
-            if (cornerstone.getEnabledElement(divRef.current)) {
-              updateViewport();
-            } else {
-              console.error('La imagen no está completamente cargada.');
-            }
-          }}
         />
       </div>
-      <div>
-        <button type="button" onClick={() => setInvertColors(!invertColors)}>
-          {invertColors ? 'Revertir a Colores Normales' : 'Invertir a Negativo'}
-        </button>
-      </div>
+      <button onClick={() => setInvertColors(!invertColors)}>
+        {invertColors ? 'Revertir' : 'Invertir'}
+      </button>
     </div>
   );
 }
 
 Imagemanipulation.propTypes = {
   imageUrl: PropTypes.string.isRequired,
-  initialWindowCenter: PropTypes.number.isRequired,
-  initialWindowWidth: PropTypes.number.isRequired,
+  initialWindowCenter: PropTypes.number,
+  initialWindowWidth: PropTypes.number,
 };
 
 export default Imagemanipulation;

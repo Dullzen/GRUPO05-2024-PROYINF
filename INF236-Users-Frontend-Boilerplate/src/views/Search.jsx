@@ -17,7 +17,31 @@ export default function Search() {
   const [dicomFileName, setDicomFileName] = useState('');
   const [fileData, setFileData] = useState(null);
   const [error, setError] = useState('');
+  const [windowWidth, setWindowWidth] = useState(1000); // Contraste
+  const [windowCenter, setWindowCenter] = useState(50); // Brillo
+  const [invertColors, setInvertColors] = useState(false); // Inversión de colores
 
+  const updateViewport = () => {
+    const element = document.getElementById('dicomImage');
+  
+    if (!cornerstone.getEnabledElement(element)) {
+      console.error('Elemento no habilitado por Cornerstone');
+      return;
+    }
+  
+    const viewport = cornerstone.getViewport(element);
+  
+    if (!viewport) {
+      console.error('No se pudo obtener el viewport');
+      return;
+    }
+  
+    viewport.voi.windowWidth = parseInt(windowWidth, 10);
+    viewport.voi.windowCenter = parseInt(windowCenter, 10);
+    viewport.invert = invertColors;
+    cornerstone.setViewport(element, viewport);
+  };
+  
   const handleInputChange = (e) => {
     setDicomFileName(e.target.value);
   };
@@ -51,7 +75,12 @@ export default function Search() {
       });
     }
   }, [fileData]);
-
+  useEffect(() => {
+    if (fileData) {
+      updateViewport();
+    }
+  }, [windowWidth, windowCenter, invertColors]);
+  
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <h1>Buscador de Archivos</h1>
@@ -211,9 +240,49 @@ export default function Search() {
             </button>
           </div>
 
-
             <p><strong>Archivo DICOM:</strong></p>
             <div id="dicomImage" style={{ width: '512px', height: '512px', margin: 'auto', background: 'black' }}></div>
+
+            <h2>Controles de la Imagen</h2>
+            <div>
+              <label htmlFor="contrast">Contraste (Window Width):</label>
+              <input
+                type="range"
+                id="contrast"
+                min="1"
+                max="5000"
+                value={windowWidth}
+                onChange={(e) => setWindowWidth(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="brightness">Brillo (Window Center):</label>
+              <input
+                type="range"
+                id="brightness"
+                min="-1000"
+                max="1000"
+                value={windowCenter}
+                onChange={(e) => setWindowCenter(e.target.value)}
+              />
+            </div>
+            <div>
+              <button
+                type="button"
+                onClick={() => setInvertColors(!invertColors)}
+                style={{
+                  padding: '10px 20px',
+                  marginTop: '10px',
+                  fontSize: '16px',
+                  backgroundColor: invertColors ? '#f44336' : '#2196F3',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '5px',
+                }}
+              >
+                {invertColors ? 'Revertir a Colores Normales' : 'Invertir a Negativo'}
+              </button>
+            </div>
           </div>
         </div>
       )}

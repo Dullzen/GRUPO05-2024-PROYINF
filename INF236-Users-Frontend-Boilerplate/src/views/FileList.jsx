@@ -1,11 +1,10 @@
-// src/views/FileList.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Imagemanipulation from '../components/Imagemanipulation'; // Importar el componente de manipulación de imágenes
+import Imagemanipulation from '../components/Imagemanipulation';
 
 export default function FileList() {
   const [fileNames, setFileNames] = useState([]);
-  const [selectedFile, setSelectedFile] = useState(null); // Estado para almacenar el archivo seleccionado
+  const [selectedFile, setSelectedFile] = useState(null);
 
   // Cargar los nombres de los archivos DICOM desde el backend
   useEffect(() => {
@@ -22,7 +21,8 @@ export default function FileList() {
   }, []);
 
   const handleSelectFile = (file) => {
-    setSelectedFile(file);  // Almacena el archivo seleccionado
+    console.log('Archivo seleccionado:', file); // Depuración
+    setSelectedFile(file);
   };
 
   return (
@@ -33,19 +33,17 @@ export default function FileList() {
           <li
             key={file.id}
             style={{ padding: '10px 0', borderBottom: '1px solid #ccc', cursor: 'pointer' }}
-            onClick={() => handleSelectFile(file)} // Selecciona un archivo al hacer clic
+            onClick={() => handleSelectFile(file)}
           >
-            {file.dicomFileName || 'Nombre de archivo no disponible'} - Paciente: {file.patientName} - Fecha: {file.studyDate}
+            {file.dicomFileName || 'Nombre de archivo no disponible'} - Paciente: {file.patientName || 'N/A'} - Fecha: {file.studyDate || 'N/A'}
           </li>
         ))}
       </ul>
 
-      {/* Mostrar el componente de manipulación de imágenes cuando se seleccione un archivo */}
       {selectedFile && (
         <div>
           <h2>Visualizando: {selectedFile.dicomFileName}</h2>
-          {/* Pasar la URL de la imagen seleccionada a ImageManipulation */}
-          <Imagemanipulation imageUrl={`http://localhost:8080/dicom/file/${selectedFile.dicomFileName}`} />
+          <Imagemanipulation imageUrl={`http://localhost:8080/uploads/${selectedFile.dicomFileName}`} />
         </div>
       )}
     </div>
