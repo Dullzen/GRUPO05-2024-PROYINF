@@ -79,54 +79,71 @@ export default function Search() {
     }
   };
   
-  const handleDownloadHeader = () => {
-    const headerData = `
-      Datos del Paciente
-      Nombre: ${fileData.patientName || 'No disponible'}
-      ID: ${fileData.patientId || 'No disponible'}
-      Fecha de Nacimiento: ${fileData.patientBirthDate || 'No disponible'}
-      Sexo: ${fileData.patientSex || 'No disponible'}
-      
-      Información del Estudio
-      Fecha del Estudio: ${fileData.studyDate || 'No disponible'}
-      Fecha de la Serie: ${fileData.seriesDate || 'No disponible'}
-      Fecha de Adquisición: ${fileData.acquisitionDate || 'No disponible'}
-      Hora del Estudio: ${fileData.studyTime || 'No disponible'}
-      Hora de la Serie: ${fileData.seriesTime || 'No disponible'}
-      Número de Acceso: ${fileData.accessionNumber || 'No disponible'}
-      Modalidad: ${fileData.modality || 'No disponible'}
-      Descripción del Estudio: ${fileData.studyDescription || 'No disponible'}
-      Descripción de la Serie: ${fileData.seriesDescription || 'No disponible'}
-      
-      Información del Dispositivo
-      Fabricante: ${fileData.manufacturer || 'No disponible'}
-      Modelo del Dispositivo: ${fileData.manufacturerModelName || 'No disponible'}
-      Nombre de la Estación: ${fileData.stationName || 'No disponible'}
-      Número de Serie: ${fileData.deviceSerialNumber || 'No disponible'}
-      Versiones del Software: ${fileData.softwareVersions || 'No disponible'}
-      
-      Parámetros Técnicos de la Imagen
-      Espesor del Corte: ${fileData.sliceThickness || 'No disponible'}
-      Tiempo de Repetición: ${fileData.repetitionTime || 'No disponible'}
-      Tiempo de Eco: ${fileData.echoTime || 'No disponible'}
-      Fuerza del Campo Magnético: ${fileData.magneticFieldStrength || 'No disponible'}
-      Espaciado de Píxeles: ${fileData.pixelSpacing || 'No disponible'}
-      Centro de la Ventana: ${fileData.windowCenter || 'No disponible'}
-      Ancho de la Ventana: ${fileData.windowWidth || 'No disponible'}
-      
-      Otros Datos Relevantes
-      Tipo de Imagen: ${fileData.imageType || 'No disponible'}
-      Orientación de la Imagen: ${fileData.imageOrientation || 'No disponible'}
-      Posición de la Imagen: ${fileData.imagePosition || 'No disponible'}
-      Interpretación Fotométrica: ${fileData.photometricInterpretation || 'No disponible'}
-    `;
-  
-    const blob = new Blob([headerData], { type: 'text/plain' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = `${fileData.dicomFileName}_header.txt`;
-    link.click();
-  };
+  const generatePatientData = (fileData) => `
+  Datos del Paciente
+  Nombre: ${fileData.patientName || 'No disponible'}
+  ID: ${fileData.patientId || 'No disponible'}
+  Fecha de Nacimiento: ${fileData.patientBirthDate || 'No disponible'}
+  Sexo: ${fileData.patientSex || 'No disponible'}
+`;
+
+const generateStudyData = (fileData) => `
+  Información del Estudio
+  Fecha del Estudio: ${fileData.studyDate || 'No disponible'}
+  Fecha de la Serie: ${fileData.seriesDate || 'No disponible'}
+  Fecha de Adquisición: ${fileData.acquisitionDate || 'No disponible'}
+  Hora del Estudio: ${fileData.studyTime || 'No disponible'}
+  Hora de la Serie: ${fileData.seriesTime || 'No disponible'}
+  Número de Acceso: ${fileData.accessionNumber || 'No disponible'}
+  Modalidad: ${fileData.modality || 'No disponible'}
+  Descripción del Estudio: ${fileData.studyDescription || 'No disponible'}
+  Descripción de la Serie: ${fileData.seriesDescription || 'No disponible'}
+`;
+
+const generateDeviceData = (fileData) => `
+  Información del Dispositivo
+  Fabricante: ${fileData.manufacturer || 'No disponible'}
+  Modelo del Dispositivo: ${fileData.manufacturerModelName || 'No disponible'}
+  Nombre de la Estación: ${fileData.stationName || 'No disponible'}
+  Número de Serie: ${fileData.deviceSerialNumber || 'No disponible'}
+  Versiones del Software: ${fileData.softwareVersions || 'No disponible'}
+`;
+
+const generateImageParamsData = (fileData) => `
+  Parámetros Técnicos de la Imagen
+  Espesor del Corte: ${fileData.sliceThickness || 'No disponible'}
+  Tiempo de Repetición: ${fileData.repetitionTime || 'No disponible'}
+  Tiempo de Eco: ${fileData.echoTime || 'No disponible'}
+  Fuerza del Campo Magnético: ${fileData.magneticFieldStrength || 'No disponible'}
+  Espaciado de Píxeles: ${fileData.pixelSpacing || 'No disponible'}
+  Centro de la Ventana: ${fileData.windowCenter || 'No disponible'}
+  Ancho de la Ventana: ${fileData.windowWidth || 'No disponible'}
+`;
+
+const generateOtherData = (fileData) => `
+  Otros Datos Relevantes
+  Tipo de Imagen: ${fileData.imageType || 'No disponible'}
+  Orientación de la Imagen: ${fileData.imageOrientation || 'No disponible'}
+  Posición de la Imagen: ${fileData.imagePosition || 'No disponible'}
+  Interpretación Fotométrica: ${fileData.photometricInterpretation || 'No disponible'}
+`;
+
+const handleDownloadHeader = () => {
+  const headerData = `
+    ${generatePatientData(fileData)}
+    ${generateStudyData(fileData)}
+    ${generateDeviceData(fileData)}
+    ${generateImageParamsData(fileData)}
+    ${generateOtherData(fileData)}
+  `;
+
+  const blob = new Blob([headerData], { type: 'text/plain' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = `${fileData.dicomFileName}_header.txt`;
+  link.click();
+};
+
   
 
   useEffect(() => {
