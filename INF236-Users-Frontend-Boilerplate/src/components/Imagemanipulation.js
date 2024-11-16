@@ -1,38 +1,36 @@
 import React, { useRef, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import cornerstone from 'cornerstone-core';
 import cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
 import dicomParser from 'dicom-parser';
 
-// Configurar cornerstone con dicomParser
 cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
 cornerstoneWADOImageLoader.external.dicomParser = dicomParser;
 
-function Imagemanipulation({ imageUrl }) {
+function Imagemanipulation({ imageUrl, initialWindowCenter, initialWindowWidth }) {
   const divRef = useRef(null);
-  const [windowWidth, setWindowWidth] = useState(400);  // Contraste (Window Width)
-  const [windowCenter, setWindowCenter] = useState(40); // Brillo (Window Center)
-  const [invertColors, setInvertColors] = useState(false); // Invertir colores
+  const [windowWidth, setWindowWidth] = useState(initialWindowWidth || 1000);
+  const [windowCenter, setWindowCenter] = useState(initialWindowCenter || 50);
+  const [invertColors, setInvertColors] = useState(false);
 
-  // Función para calcular los valores dinámicos de contraste y brillo
-  const calculateDynamicWindowValues = (image) => {
-    let minPixelValue = Infinity;
-    let maxPixelValue = -Infinity;
+  const updateViewport = () => {
+    const element = divRef.current;
 
-    const pixelData = image.getPixelData();  // Obtener los datos de los píxeles
-    for (let i = 0; i < pixelData.length; i++) {
-      const pixelValue = pixelData[i];
-      if (pixelValue < minPixelValue) {
-        minPixelValue = pixelValue;
-      }
-      if (pixelValue > maxPixelValue) {
-        maxPixelValue = pixelValue;
-      }
+    if (!cornerstone.getEnabledElement(element)) {
+      console.error('Elemento no habilitado por Cornerstone');
+      return;
     }
 
-    const dynamicWindowWidth = maxPixelValue - minPixelValue;
-    const dynamicWindowCenter = (maxPixelValue + minPixelValue) / 2;
+    const viewport = cornerstone.getViewport(element);
 
-    return { dynamicWindowWidth, dynamicWindowCenter };
+    if (!viewport) {
+      console.error('No se pudo obtener el viewport');
+      return;
+    }
+
+    viewport.voi.windowWidth = parseInt(windowWidth, 10);
+    viewport.voi.windowCenter = parseInt(windowCenter, 10);
+    cornerstone.setViewport(element, viewport);
   };
 
   useEffect(() => {
@@ -44,28 +42,12 @@ function Imagemanipulation({ imageUrl }) {
         const image = await cornerstone.loadImage(`wadouri:${imageUrl}`);
         const viewport = cornerstone.getDefaultViewportForImage(element, image);
 
-        // Obtener los valores de la imagen o calcular dinámicamente si no están presentes
-        let imageWindowWidth = image.windowWidth || 0;
-        let imageWindowCenter = image.windowCenter || 0;
-
-        // Si no existen valores recomendados, calcular dinámicamente
-        if (!imageWindowWidth || !imageWindowCenter) {
-          const { dynamicWindowWidth, dynamicWindowCenter } = calculateDynamicWindowValues(image);
-          imageWindowWidth = dynamicWindowWidth;
-          imageWindowCenter = dynamicWindowCenter;
-        }
-
-        // Configurar los valores iniciales en el viewport
-        viewport.voi.windowWidth = imageWindowWidth;
-        viewport.voi.windowCenter = imageWindowCenter;
+        viewport.voi.windowWidth = 1500; // Valores predeterminados
+        viewport.voi.windowCenter = 50;
         viewport.invert = invertColors;
 
         cornerstone.displayImage(element, image);
         cornerstone.setViewport(element, viewport);
-
-        // Actualizar los controles con los valores obtenidos o calculados
-        setWindowWidth(imageWindowWidth);
-        setWindowCenter(imageWindowCenter);
       } catch (error) {
         console.error('Error cargando la imagen DICOM:', error);
       }
@@ -78,20 +60,11 @@ function Imagemanipulation({ imageUrl }) {
     };
   }, [imageUrl, invertColors]);
 
-  // Función para actualizar la visualización con los valores manuales
-  const updateViewport = () => {
-    const element = divRef.current;
-    const viewport = cornerstone.getViewport(element);
-    viewport.voi.windowWidth = windowWidth;
-    viewport.voi.windowCenter = windowCenter;
-    cornerstone.setViewport(element, viewport);
-  };
-
   return (
     <div>
-      <div ref={divRef} style={{ width: '512px', height: '512px', backgroundColor: 'black' }}></div>
+      <h2>Visualizando: {imageUrl.split('/').pop()}</h2>
+      <div ref={divRef} style={{ width: '512px', height: '512px', backgroundColor: 'black' }} />
 
-      {/* Controles para ajustar el contraste y el brillo manualmente */}
       <div>
         <label htmlFor="contrast">Contraste (Window Width):</label>
         <input
@@ -101,7 +74,13 @@ function Imagemanipulation({ imageUrl }) {
           max="5000"
           value={windowWidth}
           onChange={(e) => setWindowWidth(e.target.value)}
-          onMouseUp={updateViewport}
+          onMouseUp={() => {
+            if (cornerstone.getEnabledElement(divRef.current)) {
+              updateViewport();
+            } else {
+              console.error('La imagen no está completamente cargada.');
+            }
+          }}
         />
       </div>
       <div>
@@ -113,11 +92,17 @@ function Imagemanipulation({ imageUrl }) {
           max="1000"
           value={windowCenter}
           onChange={(e) => setWindowCenter(e.target.value)}
-          onMouseUp={updateViewport}
+          onMouseUp={() => {
+            if (cornerstone.getEnabledElement(divRef.current)) {
+              updateViewport();
+            } else {
+              console.error('La imagen no está completamente cargada.');
+            }
+          }}
         />
       </div>
       <div>
-        <button onClick={() => setInvertColors(!invertColors)}>
+        <button type="button" onClick={() => setInvertColors(!invertColors)}>
           {invertColors ? 'Revertir a Colores Normales' : 'Invertir a Negativo'}
         </button>
       </div>
@@ -125,9 +110,10 @@ function Imagemanipulation({ imageUrl }) {
   );
 }
 
+Imagemanipulation.propTypes = {
+  imageUrl: PropTypes.string.isRequired,
+  initialWindowCenter: PropTypes.number.isRequired,
+  initialWindowWidth: PropTypes.number.isRequired,
+};
+
 export default Imagemanipulation;
-
-
-
-
-

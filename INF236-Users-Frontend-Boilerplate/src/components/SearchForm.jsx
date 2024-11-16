@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Imagemanipulation from './Imagemanipulation'; // Asegúrate de importar correctamente
 
 export default function Search() {
   const [patientId, setPatientId] = useState('');
@@ -13,6 +14,7 @@ export default function Search() {
   const handleSearch = async () => {
     try {
       const response = await axios.get(`http://localhost:8080/dicom/search/${patientId}`);
+      console.log('Datos del paciente:', response.data); // Verifica los datos recibidos
       setPatientData(response.data);
       setError('');
     } catch (err) {
@@ -49,19 +51,24 @@ export default function Search() {
       </div>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {patientData && (
-        <div style={{ marginTop: '20px', textAlign: 'left', display: 'inline-block' }}>
-          <h2>Datos del Paciente</h2>
-          <p><strong>Nombre:</strong> {patientData.patientId}</p>
-          <p><strong>Fecha de Estudio:</strong> {patientData.studyDate}</p>
-          <p><strong>Hora de Estudio:</strong> {patientData.studyTime}</p>
-          <p><strong>Hora de Imagen:</strong> {patientData.imageTime}</p>
-          <p><strong>Sexo del Paciente:</strong> {patientData.patientSex}</p>
+        <div>
+          <div style={{ marginTop: '20px', textAlign: 'left', display: 'inline-block' }}>
+            <h2>Datos del Paciente</h2>
+            <p><strong>Nombre:</strong> {patientData.patientId}</p>
+            <p><strong>Fecha de Estudio:</strong> {patientData.studyDate}</p>
+            <p><strong>Window Center:</strong> {patientData.windowCenter}</p>
+            <p><strong>Window Width:</strong> {patientData.windowWidth}</p>
+          </div>
 
-         
-          <p><strong>Filas:</strong> {patientData.rows}</p>
-          <p><strong>Columnas:</strong> {patientData.columns}</p>
+          {/* Mostrar la imagen DICOM */}
+          <Imagemanipulation
+            imageUrl={`http://localhost:8080/dicom/image/${patientId}`} // URL para la imagen DICOM
+            initialWindowCenter={patientData.windowCenter}
+            initialWindowWidth={patientData.windowWidth}
+          />
         </div>
       )}
     </div>
   );
 }
+
