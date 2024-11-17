@@ -77,4 +77,12 @@ Este proyecto permite la visualización y manipulación de imágenes médicas en
 2. Herramienta de ajuste de contraste y brillo: En progreso
 3. Botón para invertir imagen a negativo : En progreso
 4. Aplicación de mapas de colores (grayscale, hot) en imágenes DICOM: En progreso
-5.  Búsqueda de imágenes por cabecera DICOM (ID o nombre del paciente) 
+5.  Búsqueda de imágenes por cabecera DICOM (ID o nombre del paciente)
+
+## Hito 5
+## actualizacion del planning pocker:
+Escala del PC: 1 - 10
+1. Descarga de imagenes             : Mantenemos el numero 3 para su dificultad pues no nos demoro mucho implementarlo
+2. Manipulacion de Imagenes         : Colocamos el numero 5 para esta HU, la mayor dificultad fue conectar con la API, pero mas alla no fue complicado
+3. Exportacion de informacion DICOM : Mantenemos el numero 4 para esta HU, pues solo teniamos que añadir funcionalidades que ya estaban medianamente avanzadas con las otras HU
+4. Vistas sagitales de las imagenes : Actualizariamos a un 7, por la parte del frontend no hubo mucha complicacion, pero para lo del backend se tenia que ajustar bastante logica para desempaquetar los archivos                                          DICOM, por lo que no la hemos terminado de implemantar.
