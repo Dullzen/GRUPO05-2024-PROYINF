@@ -1,1 +1,94 @@
+La **issue** marcaba que la función `handleDownloadHeader` tenía una **complejidad cognitiva** demasiado alta (29, cuando el límite permitido era 15). Esto ocurre porque la función tenía muchas responsabilidades juntas, con lógica repetitiva y múltiples operaciones. A continuación te explico cómo se solucionó paso a paso:
 
+---
+
+### **Problema Inicial**
+1. **Monolítica y no modular:**
+   - La función `handleDownloadHeader` generaba todo el contenido del archivo de texto directamente dentro de la misma función.
+   - Era difícil de leer porque incluía muchos datos en un solo bloque, y cualquier cambio requería modificar esa gran sección de código.
+
+2. **Redundancia:**
+   - La función verificaba repetidamente valores de `fileData` con `|| 'No disponible'` en cada línea, haciendo que la lógica fuera repetitiva.
+
+3. **Complejidad cognitiva:**
+   - La cantidad de operaciones y condiciones acumuladas hacía que la función fuera difícil de entender y, por lo tanto, más propensa a errores o difíciles de mantener.
+
+---
+
+### **Solución Implementada**
+
+1. **División en funciones auxiliares:**
+   - Separamos las distintas secciones de datos en funciones auxiliares, cada una responsable de generar una parte específica del archivo de texto:
+     - `generatePatientData` → Datos del paciente.
+     - `generateStudyData` → Datos del estudio.
+     - `generateDeviceData` → Datos del dispositivo.
+     - `generateImageParamsData` → Parámetros técnicos de la imagen.
+     - `generateOtherData` → Otros datos relevantes.
+   - Esto permite que cada función sea más sencilla y tenga una responsabilidad clara.
+
+   Por ejemplo, la generación de los datos del paciente ahora está en una función independiente:
+   ```javascript
+   const generatePatientData = (fileData) => `
+     Datos del Paciente
+     Nombre: ${fileData.patientName || 'No disponible'}
+     ID: ${fileData.patientId || 'No disponible'}
+     Fecha de Nacimiento: ${fileData.patientBirthDate || 'No disponible'}
+     Sexo: ${fileData.patientSex || 'No disponible'}
+   `;
+   ```
+
+2. **Composición del archivo:**
+   - En lugar de manejar todo el texto en la misma función, `handleDownloadHeader` ahora llama a estas funciones auxiliares para componer el contenido del archivo.
+   - Esto reduce drásticamente la cantidad de lógica dentro de `handleDownloadHeader`:
+     ```javascript
+     const headerData = `
+       ${generatePatientData(fileData)}
+       ${generateStudyData(fileData)}
+       ${generateDeviceData(fileData)}
+       ${generateImageParamsData(fileData)}
+       ${generateOtherData(fileData)}
+     `;
+     ```
+
+3. **Reducción de la lógica repetitiva:**
+   - Al delegar las verificaciones `|| 'No disponible'` a funciones específicas, la lógica se encapsula, y no se repite en la función principal.
+
+4. **Mantenibilidad:**
+   - Ahora es más fácil añadir o modificar una sección sin afectar el resto del código. Por ejemplo, si necesitas actualizar cómo se generan los datos del dispositivo, puedes modificar únicamente `generateDeviceData`.
+
+---
+
+### **Resultados**
+- **Complejidad cognitiva reducida:**
+  - Cada función auxiliar tiene una responsabilidad clara, y la función principal (`handleDownloadHeader`) actúa como un orquestador.
+  - El código ahora es modular, limpio y mucho más fácil de entender.
+
+- **Claridad:**
+  - Las secciones de datos están claramente separadas, lo que facilita identificar qué parte pertenece a qué sección del archivo de texto.
+
+- **Cumplimiento de estándares:**
+  - La complejidad cognitiva ahora está dentro del límite permitido por la herramienta (15).
+
+---
+
+### **Código Limpio**
+Así quedó la función principal:
+```javascript
+const handleDownloadHeader = () => {
+  const headerData = `
+    ${generatePatientData(fileData)}
+    ${generateStudyData(fileData)}
+    ${generateDeviceData(fileData)}
+    ${generateImageParamsData(fileData)}
+    ${generateOtherData(fileData)}
+  `;
+
+  const blob = new Blob([headerData], { type: 'text/plain' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = `${fileData.dicomFileName}_header.txt`;
+  link.click();
+};
+```
+
+Ahora esta función es mucho más fácil de leer, entender y mantener. Además, las funciones auxiliares hacen que el código sea modular y extensible.
