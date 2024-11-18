@@ -1,0 +1,11 @@
+Por alguna razón al realizar todas las pruebas, las gráficas no presentan muchas variaciones, esto debido a que 
+se muestra errores por no encontrar el puerto para obtener la imagen, pero esta se encuentra subida dentro de la página.
+De lo que se puede obtener de cada gráfico es que todos presentan una desviacion de 1 o 2, donde todas generaron 350 ejemplos 
+con distinto troughputs
+Para la cada prueba se obtuvo los siguiente troughputs:
+-Para la primera prueba se obtuvo un troughput de 351,694/min
+- Para la segunda  prueba se obtuvo un troughput de 351,653/min
+- Para la tercera prueba se obtuvo un troughput de 351,694/min
+Con esto se puede concluir que no se obtuvo los resultados esperados debido a que probablemente hubo problemas con el ruteo para
+realizar las pruebas. Otra razón puede ser que la base de datos no esta adecuada para tantos usuarios o que al probar la ruta
+para ejecutar el jmeter no se conectaba bien con la API 
