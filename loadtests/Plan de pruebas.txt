@@ -1,0 +1,10 @@
+Prueba 1: Simulación de 50 usuarios que bombardean el endpoint para subir archivos Dicom, subiendo archivos, en un 
+plazo de 60 segundos (1 min) 
+
+Prueba 2: Simulación de 100 usuarios que bombardean el endpoint para subir archivos Dicom, subiendo archivos, en un 
+plazo de 30 segundos 
+
+Prueba 3: Simulación de 200 usuarios que bombardean el endpoint para subir archivos Dicom, subiendo archivos, en un 
+plazo de 60 segundos (1 min)
+
+A esto se sube el plan de pruebas .jmx
